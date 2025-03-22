@@ -4,9 +4,9 @@ public class LiquidContainer : Container, IHazardNotifier
 {
     private bool _dangerousIndicator = false;
 
-    public LiquidContainer(double weight, double height, double containerWeight, double containerDepth,
+    public LiquidContainer(double height, double containerWeight, double containerDepth,
         double maxCapacity)
-        : base(weight, height, containerWeight, containerDepth, maxCapacity)
+        : base(height, containerWeight, containerDepth, maxCapacity)
     {
         SetSerialNumber("KON-" + "L" + "-" + ContainerNumber);
     }
@@ -28,11 +28,11 @@ public class LiquidContainer : Container, IHazardNotifier
             if (loadingLiquidCapacity > MaxCapacity * 0.5)
             {
                 Notify();
-                Weight = MaxCapacity * 0.5;
+                Weight += MaxCapacity * 0.5;
             }
             else
             {
-                Weight = loadingLiquidCapacity;
+                Weight += loadingLiquidCapacity;
             }
         }
         else
@@ -41,19 +41,20 @@ public class LiquidContainer : Container, IHazardNotifier
             if (loadingLiquidCapacity > MaxCapacity * 0.9)
             {
                 Notify();
-                Weight = MaxCapacity * 0.9;
+                Weight += MaxCapacity * 0.9;
             }
             else
             {
-                Weight = loadingLiquidCapacity;
+                Weight += loadingLiquidCapacity;
             }
         }
     }
 
-    public void getInfo()
+    public override void getInfo()
     {
+        Console.WriteLine("Liquid Container");
         base.getInfo();
-        string textMessage = _dangerousIndicator? "Yes" : "No";
+        string textMessage = _dangerousIndicator ? "Yes" : "No";
         Console.WriteLine("Is liquid dangerous? : " + textMessage);
     }
 }

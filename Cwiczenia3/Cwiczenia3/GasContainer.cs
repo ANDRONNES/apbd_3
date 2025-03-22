@@ -2,8 +2,8 @@ namespace Cwiczenia3;
 
 public class GasContainer : Container, IHazardNotifier
 {
-    public GasContainer(double weight, double height, double containerWeight, double containerDepth, double maxCapacity)
-        : base(weight, height, containerWeight, containerDepth, maxCapacity)
+    public GasContainer(double height, double containerWeight, double containerDepth, double maxCapacity)
+        : base(height, containerWeight, containerDepth, maxCapacity)
     {
         SetSerialNumber("KON-" + "G" + "-" + ContainerNumber);
     }
@@ -18,7 +18,7 @@ public class GasContainer : Container, IHazardNotifier
     {
         if (loadingGasCapacity > MaxCapacity)
         {
-            throw new Exception("Gas capacity exceeds " + MaxCapacity);
+            throw new Exception("Gas capacity exceeds max capacity " + MaxCapacity);
         }
         else
         {
@@ -26,12 +26,20 @@ public class GasContainer : Container, IHazardNotifier
         }
     }
 
-    public void OffLoadContainer()
+    public override void OffLoadContainer()
     {
-        if (Weight < 0.05 * Weight)
+        var temp = Weight;
+        base.OffLoadContainer();
+        if (Weight < 0.05 * temp)
         {
             Notify();
-            Weight = 0.05 * Weight;
+            Weight = 0.05 * temp;
         }
+    }
+
+    public override void getInfo()
+    {
+        Console.WriteLine("Gas Container");
+        base.getInfo();
     }
 }

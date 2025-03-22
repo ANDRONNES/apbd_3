@@ -37,21 +37,20 @@ public class ContainerShip
         }
     }
 
-    public void AddContainers(List<Container> containers)
+    public void AddContainers(List<Container> containerss)
     {
-        foreach (Container container in containers)
+        for (int i = 0; i < containerss.Count; i++)
         {
-            if (((container.GetWeight() + container.GetContainerWeight()) > containerWeightLeftKG) ||
-                containersCount > maxContainersCount)
+            if (((containerss[i].GetWeight() + containerss[i].GetContainerWeight()) > containerWeightLeftKG) ||
+                containersCount >= maxContainersCount)
             {
                 throw new Exception("Container cannot be added. The ship is full");
             }
             else
             {
-                containers.Add(container);
-                containersCount++;
-                containerWeightLeftKG -= container.GetWeight() + container.GetContainerWeight();
-                ;
+                containers.Add(containerss[i]);
+                containersCount += 1;
+                containerWeightLeftKG -= containerss[i].GetWeight() + containerss[i].GetContainerWeight();
             }
         }
     }
@@ -73,63 +72,60 @@ public class ContainerShip
 
     public void swapContainers(string ContainerSerialNumber, Container secondContainer)
     {
-        foreach (Container container in containers)
+        for (int i = 0; i < containers.Count; i++)
         {
-            if (container.GetSerialNumber().Equals(ContainerSerialNumber))
+            if (containers[i].GetSerialNumber().Equals(ContainerSerialNumber))
             {
-                containerWeightLeftKG += container.GetWeight() + container.GetContainerWeight();
+                containerWeightLeftKG += containers[i].GetWeight() + containers[i].GetContainerWeight();
                 if (secondContainer.GetWeight() + secondContainer.GetContainerWeight() > containerWeightLeftKG)
                 {
-                    containerWeightLeftKG -= container.GetWeight() + container.GetContainerWeight();
+                    containerWeightLeftKG -= containers[i].GetWeight() + containers[i].GetContainerWeight();
                     throw new Exception("Containers cannot be swapped. The container is too heavy");
                 }
                 else
                 {
-                    containers.Remove(container);
+                    containerWeightLeftKG += containers[i].GetWeight() + containers[i].GetContainerWeight();
+                    containers.Remove(containers[i]);
                     containersCount--;
-                    containerWeightLeftKG += container.GetWeight() + container.GetContainerWeight();
-                    ;
+
                     containers.Add(secondContainer);
                     containersCount++;
-                    containerWeightLeftKG -= container.GetWeight() + container.GetContainerWeight();
-                    ;
+                    containerWeightLeftKG -= secondContainer.GetWeight() + secondContainer.GetContainerWeight();
                 }
             }
-            else
-            {
-                throw new Exception("Container cannot be swapped. There is no container which you want to swap");
-            }
+        }
+
+        if (!containers.Contains(secondContainer))
+        {
+            throw new Exception("Container cannot be swapped. There is no container which you want to swap");
         }
     }
 
     public void MoveContainers(string containerSerialNumber, ContainerShip anotherShip)
     {
-        foreach (var container in containers)
+        for (int i = 0; i < containers.Count; i++)
         {
-            if (container.GetSerialNumber().Equals(containerSerialNumber))
+            if (containers[i].GetSerialNumber().Equals(containerSerialNumber))
             {
-                /*if (container.GetContainerWeight() + container.GetWeight() > anotherShip.GetContainerWeightLeft()
-                    || anotherShip.GetContainerCount() >= anotherShip.GetMaxContainerCount())
-                {
-                    throw new Exception("Container cannot be moved. The ship is full");
-                }
-                else
-                {
-                    anotherShip.AddContainer(container);
-                }*/
-                anotherShip.AddContainer(container);
+                anotherShip.AddContainer(containers[i]);
+                containers.RemoveAt(i);
             }
-            else
-            {
-                throw new Exception("Container cannot be moved. There is no container which you want to move");
-            }
+        }
+
+        if (containers.Count == containersCount)
+        {
+            throw new Exception("Containers cannot be moved. There is no container which you want to move");
+        }
+        else
+        {
+            containersCount--;
         }
     }
 
     public void getInfo()
     {
         Console.WriteLine("Max speed of ship: " + maxSpeed + " knots, Max containers count: "
-                          + maxContainersCount + " containers, Current containers on ship " + containersCount + 
-                          " Max containers weight: " + maxContainersWeight + "ton");
+                          + maxContainersCount + " containers, Current containers on ship " + containersCount +
+                          ", Max containers weight: " + maxContainersWeight + "ton");
     }
 }

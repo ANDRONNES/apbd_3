@@ -14,20 +14,27 @@ public abstract class Container
     public double GetWeight() => Weight;
     public double GetContainerWeight() => ContainerWeight;
 
-    public Container(double weight, double height, double containerWeight, double containerDepth, double maxCapacity)
+    public Container(double height, double containerWeight, double containerDepth, double maxCapacity)
     {
-        Weight = weight;
+        Weight = 0;
         Height = height;
         ContainerWeight = containerWeight;
         ContainerDepth = containerDepth;
-        // _SerialNumber = "KON-"+serialNumber+"-"+ContenerNumber;
         MaxCapacity = maxCapacity;
-        ContainerNumber++; 
+        ContainerNumber++;
     }
 
-    public void getInfo()
+    public virtual void getInfo()
     {
+        string isEmpty = Weight == 0 ? "Container is empty" : "Container is not empty";
         Console.WriteLine("Weight: " + Weight + "\nHeight: " + Height + "\nContainer Weight: " + ContainerWeight +
-                          "\nContainer Depth: " + ContainerDepth + "\nMax Capacity: " + MaxCapacity + "\nSerial Number: " + SerialNumber);
+                          "\nContainer Depth: " + ContainerDepth + "\nMax Capacity: " + MaxCapacity +
+                          "\nSerial Number: " + SerialNumber + "\n" + isEmpty);
+    }
+
+    public virtual void OffLoadContainer()
+    {
+        Console.WriteLine("Off Loading the Container");
+        Weight = 0;
     }
 }

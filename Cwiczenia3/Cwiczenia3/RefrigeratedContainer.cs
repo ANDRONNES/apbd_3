@@ -7,9 +7,9 @@ public class RefrigeratedContainer : Container
     private string? ProductName = null;
 
 
-    public RefrigeratedContainer(double weight, double height, double containerWeight, double containerDepth,
-        double maxCapacity, string productName, double refrigeratingTemperature)
-        : base(weight, height, containerWeight, containerDepth, maxCapacity)
+    public RefrigeratedContainer(double height, double containerWeight, double containerDepth,
+        double maxCapacity, /*string productName,*/ double refrigeratingTemperature)
+        : base(height, containerWeight, containerDepth, maxCapacity)
     {
         this.refrigeratingTemperature = refrigeratingTemperature;
         SetSerialNumber("KON-" + "C" + "-" + ContainerNumber);
@@ -40,7 +40,7 @@ public class RefrigeratedContainer : Container
                 if (pair.Value > refrigeratingTemperature)
                 {
                     Console.WriteLine("The temperature for this product must be " + pair.Value +
-                                      "\n Changing temperature to " + pair.Value);
+                                      "\nChanging temperature to " + pair.Value);
                     refrigeratingTemperature = pair.Value;
                 }
 
@@ -80,9 +80,29 @@ public class RefrigeratedContainer : Container
         }
     }
 
-    public void getInfo()
+    public override void getInfo()
     {
+        Console.WriteLine("Refrigerated Container");
         base.getInfo();
-        Console.WriteLine("Container product type " + ProductName + ", containter temperature " + refrigeratingTemperature + "F");
+        Console.WriteLine("Container product type " + ProductName + ", containter temperature " +
+                          refrigeratingTemperature + "F. \n Possible products: ");
+        printPossibleProducts();
+    }
+
+    public void printPossibleProducts()
+    {
+        Console.WriteLine("----------------------------");
+        Console.WriteLine("Product          Temperature");
+        Console.WriteLine("----------------------------");
+        foreach (var p in typeAndStoreTemperarureOfPossibleProducts)
+        {
+            Console.WriteLine($"{p.Key,-15} {p.Value,10:0.00}");
+        }
+    }
+
+    public override void OffLoadContainer()
+    {
+        base.OffLoadContainer();
+        ProductName = null;
     }
 }
