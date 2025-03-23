@@ -5,6 +5,8 @@ internal class Program
     static void Main(string[] args)
     {
         ConsoleInterface consoleInterface = new ConsoleInterface();
+        // LiquidContainer l1 = new LiquidContainer(200, 150, 250, 400);
+        // Console.WriteLine(l1.getInfo());
         /*LiquidContainer l1 = new LiquidContainer(200, 150, 250, 400);
         LiquidContainer l2 = new LiquidContainer(200, 150, 250, 300);
         LiquidContainer l3 = new LiquidContainer(200, 150, 250, 300);
