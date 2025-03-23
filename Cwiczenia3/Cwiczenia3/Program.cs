@@ -4,7 +4,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        LiquidContainer l1 = new LiquidContainer(200, 150, 250, 400);
+        ConsoleInterface consoleInterface = new ConsoleInterface();
+        /*LiquidContainer l1 = new LiquidContainer(200, 150, 250, 400);
         LiquidContainer l2 = new LiquidContainer(200, 150, 250, 300);
         LiquidContainer l3 = new LiquidContainer(200, 150, 250, 300);
         l1.getInfo();
@@ -40,6 +41,6 @@ internal class Program
         ContainerShip cs2 = new ContainerShip(100, 3, 1);
         cs1.MoveContainers(g1.GetSerialNumber(), cs2);
         cs2.getInfo();
-        cs1.getInfo();
+        cs1.getInfo();*/
     }
 }

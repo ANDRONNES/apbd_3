@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Cwiczenia3;
 
 public class GasContainer : Container, IHazardNotifier
@@ -37,9 +39,10 @@ public class GasContainer : Container, IHazardNotifier
         }
     }
 
-    public override void getInfo()
+    /*public override string getInfo()
     {
-        Console.WriteLine("Gas Container");
-        base.getInfo();
-    }
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Gas Container" + base.ToString());
+        return sb.ToString();
+    }*/
 }

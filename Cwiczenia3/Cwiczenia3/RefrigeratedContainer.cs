@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Cwiczenia3;
 
 public class RefrigeratedContainer : Container
@@ -80,14 +82,14 @@ public class RefrigeratedContainer : Container
         }
     }
 
-    public override void getInfo()
+    /*public override string getInfo()
     {
-        Console.WriteLine("Refrigerated Container");
-        base.getInfo();
-        Console.WriteLine("Container product type " + ProductName + ", containter temperature " +
-                          refrigeratingTemperature + "F. \n Possible products: ");
-        printPossibleProducts();
-    }
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Refrigerated Container" + base.ToString());
+        sb.AppendLine("Container product type " + ProductName + ", containter temperature " +
+                      refrigeratingTemperature + "F. \n");
+        return sb.ToString();
+    }*/
 
     public void printPossibleProducts()
     {

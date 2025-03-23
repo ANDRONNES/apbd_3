@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Cwiczenia3;
 
 public abstract class Container
@@ -24,12 +26,14 @@ public abstract class Container
         ContainerNumber++;
     }
 
-    public virtual void getInfo()
+    public /*virtual*/ string getInfo()
     {
+        StringBuilder sb = new StringBuilder();
         string isEmpty = Weight == 0 ? "Container is empty" : "Container is not empty";
-        Console.WriteLine("Weight: " + Weight + "\nHeight: " + Height + "\nContainer Weight: " + ContainerWeight +
-                          "\nContainer Depth: " + ContainerDepth + "\nMax Capacity: " + MaxCapacity +
-                          "\nSerial Number: " + SerialNumber + "\n" + isEmpty);
+        sb.Append("Weight: " + Weight + ", Height: " + Height + ", Container Weight: " + ContainerWeight +
+                  ", Container Depth: " + ContainerDepth + ", Max Capacity: " + MaxCapacity +
+                  "\nSerial Number: " + SerialNumber + ", " + isEmpty);
+        return sb.ToString();
     }
 
     public virtual void OffLoadContainer()

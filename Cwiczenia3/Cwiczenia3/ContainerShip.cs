@@ -122,10 +122,10 @@ public class ContainerShip
         }
     }
 
-    public void getInfo()
+    public string getInfo()
     {
-        Console.WriteLine("Max speed of ship: " + maxSpeed + " knots, Max containers count: "
-                          + maxContainersCount + " containers, Current containers on ship " + containersCount +
-                          ", Max containers weight: " + maxContainersWeight + "ton");
+        return "speed: " + maxSpeed + " knots, maxContainerNum: "
+                + maxContainersCount + " containers, Current num of containers on ship: " + containersCount +
+                ",  maxWeight: " + maxContainersWeight + "ton";
     }
 }

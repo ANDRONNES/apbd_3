@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Cwiczenia3;
 
 public class LiquidContainer : Container, IHazardNotifier
@@ -50,11 +52,12 @@ public class LiquidContainer : Container, IHazardNotifier
         }
     }
 
-    public override void getInfo()
+    /*public override string getInfo()
     {
-        Console.WriteLine("Liquid Container");
-        base.getInfo();
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Liquid Container" + base.getInfo().ToString());
         string textMessage = _dangerousIndicator ? "Yes" : "No";
-        Console.WriteLine("Is liquid dangerous? : " + textMessage);
-    }
+        sb.AppendLine("Is liquid dangerous? : " + textMessage);
+        return sb.ToString();
+    }*/
 }
