@@ -77,7 +77,7 @@ public class RefrigeratedContainer : Container
             }
             else
             {
-                Console.WriteLine("The container is full");
+                    throw new OverfillException("container capacity overfilled");
             }
         }
     }

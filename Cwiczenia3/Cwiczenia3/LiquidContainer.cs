@@ -40,6 +40,10 @@ public class LiquidContainer : Container, IHazardNotifier
         else
         {
             _dangerousIndicator = false;
+            if (loadingLiquidCapacity > MaxCapacity)
+            {
+                throw new OverfillException("container capacity overfilled");
+            }
             if (loadingLiquidCapacity > MaxCapacity * 0.9)
             {
                 Notify();

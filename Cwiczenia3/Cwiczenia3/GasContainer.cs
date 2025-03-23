@@ -20,7 +20,7 @@ public class GasContainer : Container, IHazardNotifier
     {
         if (loadingGasCapacity > MaxCapacity)
         {
-            throw new Exception("Gas capacity exceeds max capacity " + MaxCapacity);
+            throw new OverfillException("container capacity overfilled");
         }
         else
         {
